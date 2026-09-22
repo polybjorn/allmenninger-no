@@ -5,13 +5,20 @@
  indicator, the reduced-motion block and the anchor offset are repairs, not
  ports. Her palette and type are untouched. */
 
+/* Green is the ground the work happens on; the reds are the fire she uses to
+   manage it. The accent has two forms because one cannot serve both surfaces:
+   --ember is the dark form for text and rings on cream, --ember-glow the light
+   form for a filled control on the moss-dark panel. Every pairing the page
+   actually makes clears WCAG AA; the numbers are in the style guide. */
 :root{
   --moss: #3f5d47;
   --moss-dark: #2c4433;
-  --moss-light: #6b8a6f;
+  --moss-mid: #4e6b52;
   --cream: #faf6ee;
   --paper: #ffffff;
-  --clay: #b5764f;
+  --ember: #a8381a;
+  --ember-dark: #8c2e15;
+  --ember-glow: #e8834f;
   --ink: #2b2b26;
   --muted: #6b6a5f;
   --line: #e4ddcc;
@@ -38,7 +45,7 @@ a{color:inherit;}
    against cream (3.44) and against the paper sections (3.70), which is what a
    focus indicator needs. It does not clear it against the moss-dark contact
    panel (2.86), so that one ring is overridden where the panel is defined. */
-:focus-visible{outline:3px solid var(--clay); outline-offset:2px;}
+:focus-visible{outline:3px solid var(--ember); outline-offset:2px;}
 /* The skip link focuses this, and a ring around the whole document is noise. */
 main:focus, main:focus-visible{outline:none;}
 .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
@@ -68,14 +75,14 @@ nav.wrap{
 .brand-logo{height:44px; width:auto; flex-shrink:0;}
 .navlinks{display:flex; gap:28px; font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif; font-size:0.95rem;}
 .navlinks a{text-decoration:none; color:var(--ink); font-weight:500;}
-.navlinks a:hover{color:var(--clay);}
+.navlinks a:hover{color:var(--ember);}
 .langswitch{
   display:flex; gap:10px; align-items:center;
   font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
   font-size:0.82rem; letter-spacing:0.04em; text-transform:uppercase;
 }
 .langswitch a{text-decoration:none; color:var(--muted); font-weight:600;}
-.langswitch a:hover{color:var(--clay);}
+.langswitch a:hover{color:var(--ember);}
 
 .hero{
   padding:88px 0 0;
@@ -91,7 +98,7 @@ nav.wrap{
 .hero .eyebrow{
   font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
   text-transform:uppercase; letter-spacing:0.12em; font-size:0.78rem;
-  color:var(--clay); font-weight:700; margin-bottom:16px;
+  color:var(--ember); font-weight:700; margin-bottom:16px;
 }
 .hero h1{
   font-size:2.5rem; margin:0 0 20px;
@@ -137,7 +144,7 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
 .section-head .kicker{
   font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
   text-transform:uppercase; letter-spacing:0.12em; font-size:0.75rem;
-  color:var(--moss-light); font-weight:700; margin-bottom:10px;
+  color:var(--moss-mid); font-weight:700; margin-bottom:10px;
 }
 .section-head h2{font-size:1.9rem; margin:0 0 14px;}
 .section-head p{color:var(--muted); margin:0;}
@@ -171,7 +178,7 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
   background:var(--cream); border:1px solid var(--line); border-radius:4px;
   padding:22px 24px;
 }
-.about .fact h3{font-size:0.95rem; margin:0 0 6px; color:var(--clay); font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;}
+.about .fact h3{font-size:0.95rem; margin:0 0 6px; color:var(--ember); font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;}
 .about .fact p{margin:0; font-size:0.95rem; color:var(--ink);}
 
 /* Tenester / produkt */
@@ -197,7 +204,7 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
 .card-body{padding:28px 28px 30px;}
 .card .num{
   font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
-  font-size:0.8rem; color:var(--moss-light); font-weight:700; letter-spacing:0.08em;
+  font-size:0.8rem; color:var(--moss-mid); font-weight:700; letter-spacing:0.08em;
   margin-bottom:14px; display:block;
 }
 .card h3{font-size:1.2rem; margin:0 0 12px;}
@@ -212,7 +219,7 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
 .tl-item::before{
   content:""; position:absolute; left:-38px; top:4px;
   width:12px; height:12px; border-radius:50%;
-  background:var(--clay); border:3px solid var(--cream);
+  background:var(--ember); border:3px solid var(--cream);
 }
 section.alt .tl-item::before{border-color:var(--paper);}
 .tl-item .year{
@@ -250,10 +257,10 @@ section.alt .tl-item::before{border-color:var(--paper);}
 }
 .contact-box h2{color:#fff; margin:0 0 8px; font-size:1.7rem;}
 .contact-box p{color:#d9e2da; margin:0; max-width:420px;}
-.contact-box .btn{background:var(--clay);}
+.contact-box .btn{background:var(--ember-glow); color:var(--ink);}
 /* Clay-on-moss-dark is 2.86:1, under the 3:1 a focus indicator needs. */
 .contact-box :focus-visible{outline-color:var(--cream);}
-.contact-box .btn:hover{background:#a1663f;}
+.contact-box .btn:hover{background:#d9703f;}
 
 footer{
   padding:32px 0 44px; text-align:center; color:var(--muted); font-size:0.85rem;
