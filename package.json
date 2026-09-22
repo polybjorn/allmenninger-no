@@ -7,7 +7,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "clean": "rm -rf node_modules/.astro dist"
+    "clean": "rm -rf node_modules/.astro dist",
+    "pretest": "npm run build",
+    "test": "node --test \"test/*.test.mjs\""
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
