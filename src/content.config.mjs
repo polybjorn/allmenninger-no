@@ -65,6 +65,7 @@ const pages = defineCollection({
         tall: z.boolean().default(false),
       })),
     }),
+    skipLink: z.string(),
     footer: z.string(),
     contact: z.object({
       heading: z.string(),

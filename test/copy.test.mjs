@@ -8,12 +8,17 @@ import { readFileSync } from 'node:fs';
 // here, which is the case a human reviewer is worst at catching.
 //
 // Reads dist/, so it needs a build first - `pretest` does that.
+// Chrome this rebuild added, which her 2026-09-22 site therefore has no text
+// for. Each is dropped before the comparison rather than pardoned line by line,
+// and the test below holds every one of them to still existing - otherwise an
+// exclusion here would quietly cover for the element disappearing.
+const ADDED_CHROME = [
+  { name: 'language switcher', re: /<div class="langswitch">[\s\S]*?<\/div>/g },
+  { name: 'skip link', re: /<a[^>]*class="skip-link"[^>]*>[\s\S]*?<\/a>/g },
+];
+
 const visibleText = (html) => {
-  let s = html
-    // The language switcher is chrome this rebuild added, not copy she wrote,
-    // so it is not part of what the snapshot can speak to. Dropped here rather
-    // than pardoned line by line; the test below holds it to existing.
-    .replace(/<div class="langswitch">[\s\S]*?<\/div>/g, '')
+  let s = ADDED_CHROME.reduce((acc, { re }) => acc.replace(re, ''), html)
     .replace(/<(style|script|svg)\b[^>]*>[\s\S]*?<\/\1>/g, '')
     .replace(/data:image\/[a-zA-Z+]+;base64,[A-Za-z0-9+/=]+/g, '');
   s = s.slice(s.indexOf('<body'));
@@ -45,7 +50,9 @@ test('page copy matches the 2026-09-22 snapshot of allmenninger.no', () => {
   assert.equal(built.length, original.length);
 });
 
-test('the language switcher survives its own exclusion from the copy check', () => {
+test('every excluded element still exists to be excluded', () => {
   const html = readFileSync('dist/index.html', 'utf8');
-  assert.match(html, /<div class="langswitch">/, 'nothing left for visibleText to strip');
+  for (const { name, re } of ADDED_CHROME) {
+    assert.match(html, re, `${name} is gone, so its exclusion now hides nothing`);
+  }
 });

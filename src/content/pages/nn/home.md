@@ -107,6 +107,7 @@ gallery:
         src: "galleri-sau-beite.jpg"
         alt: "Sau på beite i grønt kystlandskap ved sjøen i regnvêr"
       caption: "Sau på beite i kystlandskapet"
+skipLink: "Hopp til innhaldet"
 footer: "Allmenninger – LR Mathisen · Vibrandsøy, Noreg"
 contact:
   heading: "Har du eit prosjekt i tankane?"

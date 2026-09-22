@@ -108,6 +108,7 @@ gallery:
         src: "galleri-sau-beite.jpg"
         alt: "Sheep grazing in a green coastal landscape by the sea in the rain"
       caption: "Sheep grazing in the coastal landscape"
+skipLink: "Skip to content"
 footer: "Allmenninger – LR Mathisen · Vibrandsøy, Norway"
 contact:
   heading: "Have a project in mind?"

@@ -24,6 +24,7 @@ const others = locales.filter((l) => l.code !== lang);
 ---
 
 <Layout title={data.title} description={data.description} lang={lang}>
+  <a href="#main" class="skip-link">{data.skipLink}</a>
   <header>
     <nav class="wrap">
       <a class="brand" href="#top"><Image class="brand-logo" src={logo} alt="Allmenninger logo" /></a>
@@ -39,6 +40,7 @@ const others = locales.filter((l) => l.code !== lang);
   </header>
 
   <div id="top"></div>
+  <main id="main">
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-actions">
@@ -159,6 +161,8 @@ const others = locales.filter((l) => l.code !== lang);
       </div>
     </div>
   </section>
+
+  </main>
 
   <footer>
     <div class="wrap">{data.footer}</div>

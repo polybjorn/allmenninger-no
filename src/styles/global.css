@@ -32,6 +32,17 @@ h1,h2,h3{
 a{color:inherit;}
 .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
 
+/* Visible only while focused: it lets a keyboard or screen-reader visitor pass
+   the six header links and land on the content. */
+.skip-link{
+  position:absolute; top:-100%; left:16px; z-index:30;
+  background:var(--moss-dark); color:var(--cream);
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-size:0.9rem; padding:10px 16px; border-radius:0 0 4px 4px;
+  text-decoration:none;
+}
+.skip-link:focus{top:0;}
+
 header{
   position:sticky; top:0; z-index:20;
   background:rgba(250,246,238,0.92);
