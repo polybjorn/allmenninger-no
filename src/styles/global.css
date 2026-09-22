@@ -1,0 +1,233 @@
+/* Ported from the original allmenninger.no stylesheet (snapshot 2026-09-22),
+ which was one inline <style> block. Kept as-is so the rebuild renders like
+ the site Lene already has; any design change is a separate decision.
+ Known gap carried over: .navlinks is display:none under 800px and there is
+ no replacement menu, so the section links are unreachable on a phone. */
+
+:root{
+  --moss: #3f5d47;
+  --moss-dark: #2c4433;
+  --moss-light: #6b8a6f;
+  --cream: #faf6ee;
+  --paper: #ffffff;
+  --clay: #b5764f;
+  --ink: #2b2b26;
+  --muted: #6b6a5f;
+  --line: #e4ddcc;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height:1.6;
+}
+h1,h2,h3{
+  font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  color: var(--moss-dark);
+  line-height:1.2;
+}
+a{color:inherit;}
+.wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
+
+header{
+  position:sticky; top:0; z-index:20;
+  background:rgba(250,246,238,0.92);
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid var(--line);
+}
+nav.wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 24px;
+}
+.brand{
+  display:flex; align-items:center; gap:10px;
+  font-family:"Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-weight:700; font-size:1.2rem; color:var(--moss-dark);
+  letter-spacing:0.02em;
+  text-decoration:none;
+}
+.brand span{color:var(--clay);}
+.brand-logo{height:52px; width:52px; flex-shrink:0;}
+.navlinks{display:flex; gap:28px; font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif; font-size:0.95rem;}
+.navlinks a{text-decoration:none; color:var(--ink); font-weight:500;}
+.navlinks a:hover{color:var(--clay);}
+.navtoggle{display:none;}
+
+.hero{
+  padding:88px 0 0;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(107,138,111,0.18), transparent 55%),
+    var(--cream);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid; grid-template-columns: 1.15fr 0.85fr; gap:48px; align-items:center;
+}
+.hero .eyebrow{
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  text-transform:uppercase; letter-spacing:0.12em; font-size:0.78rem;
+  color:var(--clay); font-weight:700; margin-bottom:16px;
+}
+.hero h1{
+  font-size:2.5rem; margin:0 0 20px;
+}
+.hero p.lead{
+  font-size:1.1rem; color:var(--muted); margin-bottom:32px;
+}
+.hero-actions{padding-bottom:88px;}
+.hero-media{
+  position:relative; align-self:stretch;
+}
+.hero-media img{
+  width:100%; height:100%; min-height:420px; object-fit:cover;
+  border-radius:8px 8px 0 0;
+  box-shadow:0 30px 60px -30px rgba(44,68,51,0.45);
+}
+.hero-media .cap{
+  position:absolute; bottom:14px; left:14px; right:14px;
+  background:rgba(44,68,51,0.72); color:#f1efe6;
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-size:0.78rem; padding:8px 12px; border-radius:4px;
+  backdrop-filter:blur(2px);
+}
+.btn{
+  display:inline-block;
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  background:var(--moss); color:#fff; text-decoration:none;
+  padding:13px 26px; border-radius:2px; font-weight:600; font-size:0.95rem;
+  letter-spacing:0.01em;
+  transition:background 0.15s ease;
+}
+.btn:hover{background:var(--moss-dark);}
+.btn.ghost{
+  background:transparent; color:var(--moss-dark); border:1px solid var(--moss);
+  margin-left:14px;
+}
+.btn.ghost:hover{background:var(--moss); color:#fff;}
+
+section{padding:76px 0;}
+section.alt{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+
+.section-head{max-width:640px; margin-bottom:48px;}
+.section-head .kicker{
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  text-transform:uppercase; letter-spacing:0.12em; font-size:0.75rem;
+  color:var(--moss-light); font-weight:700; margin-bottom:10px;
+}
+.section-head h2{font-size:1.9rem; margin:0 0 14px;}
+.section-head p{color:var(--muted); margin:0;}
+
+/* Om */
+.about{display:grid; grid-template-columns: 0.85fr 1.4fr; gap:56px; align-items:start;}
+.about-media{margin-bottom:20px;}
+.about-media img{
+  width:100%; border-radius:8px; object-fit:cover; aspect-ratio: 3/4;
+  box-shadow:0 20px 40px -24px rgba(44,68,51,0.4);
+}
+.about .fact{
+  background:var(--cream); border:1px solid var(--line); border-radius:4px;
+  padding:22px 24px; margin-bottom:16px;
+}
+.about .fact h3{font-size:0.95rem; margin:0 0 6px; color:var(--clay); font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;}
+.about .fact p{margin:0; font-size:0.95rem; color:var(--ink);}
+
+/* Tenester / produkt */
+.services{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap:30px;
+}
+.card{
+  background:var(--cream); border:1px solid var(--line); border-radius:8px;
+  position:relative; overflow:hidden;
+}
+.card-media{
+  height:190px; position:relative; background:var(--moss);
+}
+.card-media img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.card-media.illustration{
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(155deg, var(--moss) 0%, var(--moss-dark) 100%);
+}
+.card-media.illustration svg{width:84px; height:84px;}
+.card-body{padding:28px 28px 30px;}
+.card .num{
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-size:0.8rem; color:var(--moss-light); font-weight:700; letter-spacing:0.08em;
+  margin-bottom:14px; display:block;
+}
+.card h3{font-size:1.2rem; margin:0 0 12px;}
+.card p{color:var(--muted); font-size:0.97rem; margin:0 0 14px;}
+.card ul{margin:0; padding-left:18px; color:var(--ink); font-size:0.93rem;}
+.card ul li{margin-bottom:6px;}
+
+/* Prosjekt */
+.timeline{border-left:2px solid var(--line); margin-left:6px; padding-left:32px;}
+.tl-item{position:relative; padding-bottom:34px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{
+  content:""; position:absolute; left:-38px; top:4px;
+  width:12px; height:12px; border-radius:50%;
+  background:var(--clay); border:3px solid var(--cream);
+}
+section.alt .tl-item::before{border-color:var(--paper);}
+.tl-item .year{
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-weight:700; color:var(--moss-dark); font-size:0.92rem; margin-bottom:4px;
+}
+.tl-item h3{font-size:1.05rem; margin:0 0 6px;}
+.tl-item p{margin:0; color:var(--muted); font-size:0.95rem;}
+
+/* Galleri */
+.gallery{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-auto-rows:220px; gap:16px;
+}
+.gallery figure{
+  margin:0; position:relative; overflow:hidden; border-radius:8px; background:var(--moss);
+}
+.gallery figure.tall{grid-row: span 2;}
+.gallery img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .5s ease;
+}
+.gallery figure:hover img{transform:scale(1.05);}
+.gallery figcaption{
+  position:absolute; bottom:0; left:0; right:0;
+  background:linear-gradient(0deg, rgba(44,68,51,0.78) 0%, rgba(44,68,51,0) 100%);
+  color:#f1efe6; font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-size:0.82rem; padding:26px 14px 10px;
+}
+
+/* Kontakt */
+.contact-box{
+  background:var(--moss-dark); color:#fff; border-radius:8px;
+  padding:52px 48px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px;
+}
+.contact-box h2{color:#fff; margin:0 0 8px; font-size:1.7rem;}
+.contact-box p{color:#d9e2da; margin:0; max-width:420px;}
+.contact-box .btn{background:var(--clay);}
+.contact-box .btn:hover{background:#a1663f;}
+
+footer{
+  padding:32px 0 44px; text-align:center; color:var(--muted); font-size:0.85rem;
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+}
+
+@media (max-width: 800px){
+  .gallery{grid-auto-rows:200px;}
+  .gallery figure.tall{grid-row: span 1;}
+  .about{grid-template-columns:1fr;}
+  .about-media img{aspect-ratio:16/10;}
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-media img{min-height:260px; border-radius:8px;}
+  .hero-actions{padding-bottom:56px;}
+  .navlinks{display:none;}
+  .hero h1{font-size:2rem;}
+  .contact-box{flex-direction:column; align-items:flex-start; padding:36px 28px;}
+}

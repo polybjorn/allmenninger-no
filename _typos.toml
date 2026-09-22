@@ -1,0 +1,16 @@
+# The spellchecker is English-only, and the page copy is Nynorsk. Left
+# unexcluded it flags ordinary words in every section, and each new language
+# adds more.
+[files]
+extend-exclude = [
+  "src/content/**",
+  "src/i18n/ui/*.json",
+]
+
+# Norwegian words and names that survive outside src/content: the client's name
+# in comments and the README, the section name the ported stylesheet uses, and
+# the photo filenames.
+[default.extend-words]
+Lene = "Lene"
+lene = "lene"
+produkt = "produkt"

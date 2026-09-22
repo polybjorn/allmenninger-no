@@ -1,0 +1,80 @@
+# Build on the self-hosted runner (media-runner, docker label). The GitHub Pages
+# deploy stays in .github/workflows/deploy.yml, running off the push mirror -
+# this job is the gate that runs on the forge the push actually lands on.
+# `uses:` resolves via data.forgejo.org, not github.com.
+#
+# check-attribution.sh gates AI attribution in commit messages and PR
+# descriptions: co-author trailers, generated-with lines, the per-session
+# trailer a harness injects, and bare assistant URLs. Script and job ported
+# from rovar-no.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: docker
+    # Runner capacity is 1 across all repos and its backstop is 30 minutes, so
+    # a wedged install blocks every other repo's CI for that long. A green run
+    # here is seconds; 10 minutes fails well before the backstop does.
+    timeout-minutes: 10
+    # Bounds the fast-fail shape only - a refused connection costs 70s by
+    # default and 10s with these set. A registry that accepts and never answers
+    # is bounded by timeout-minutes above, not by these. Same rationale as
+    # rovar-no #24.
+    env:
+      npm_config_fetch_retries: 1
+      npm_config_fetch_timeout: 15000
+      # Must stay above npm's 10s mintimeout, or npm refuses the config and the
+      # step fails for a reason unrelated to the network.
+      npm_config_fetch_retry_maxtimeout: 20000
+    steps:
+      - uses: actions/checkout@v7
+      - run: npm ci
+      - run: npm run build
+
+  attribution:
+    runs-on: docker
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check commit messages
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+        run: |
+          set -eu
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin "${{ github.event.pull_request.base.ref }}"
+            ./check-attribution.sh commits "origin/${{ github.event.pull_request.base.ref }}..HEAD"
+            exit 0
+          fi
+          # On a push, read what the push actually added. A merge commit carries
+          # none of the trailers its parents do, so checking only the tip hides
+          # anything that got past the pull_request job.
+          zero=0000000000000000000000000000000000000000
+          after=${AFTER:-HEAD}
+          [ "$after" = "$zero" ] && after=HEAD
+          if [ -n "${BEFORE:-}" ] && [ "$BEFORE" != "$zero" ] && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            range="$BEFORE..$after"
+          else
+            # First push of a branch, or a runner that does not hand us the
+            # previous tip.
+            range="$after^1..$after"
+          fi
+          echo "Checking $range"
+          ./check-attribution.sh commits "$range"
+      - name: Check PR description
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          printf '%s' "$PR_BODY" > /tmp/pr-body.txt
+          ./check-attribution.sh body /tmp/pr-body.txt

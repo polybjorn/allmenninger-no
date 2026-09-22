@@ -1,0 +1,168 @@
+---
+import { getEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import { defaultLocale } from '../i18n/locales.js';
+import logo from '../assets/logo.svg';
+
+const lang = defaultLocale;
+const entry = await getEntry('pages', `${lang}/home`);
+if (!entry) throw new Error(`No page content for ${lang}`);
+const { data } = entry;
+// The Om section is the one piece of flowing prose, so it is the markdown body.
+const { Content } = await render(entry);
+
+// Frontmatter names photos by filename; Astro needs the import to optimise
+// them, so resolve each name against the asset directory here.
+const photos = import.meta.glob('../assets/*.jpg', { eager: true, import: 'default' });
+const photo = (name) => {
+  const img = photos[`../assets/${name}`];
+  if (!img) throw new Error(`Missing asset: ${name}`);
+  return img;
+};
+
+const nav = [
+  { href: '#tenester', label: data.services.heading },
+  { href: '#om', label: 'Om' },
+  { href: '#prosjekt', label: data.projects.heading },
+  { href: '#galleri', label: data.gallery.heading },
+  { href: '#kontakt', label: 'Kontakt' },
+];
+---
+
+<Layout title={data.title} description={data.description} lang={lang}>
+  <header>
+    <nav class="wrap">
+      <a class="brand" href="#top"><Image class="brand-logo" src={logo} alt="Allmenninger logo" /></a>
+      <div class="navlinks">
+        {nav.map(({ href, label }) => <a href={href}>{label}</a>)}
+      </div>
+    </nav>
+  </header>
+
+  <div id="top"></div>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-actions">
+        <div class="eyebrow">{data.hero.eyebrow}</div>
+        <h1>{data.hero.heading}</h1>
+        <p class="lead">{data.hero.lead}</p>
+        {data.hero.actions.map((a, i) => (
+          <a class={i === 0 ? 'btn' : 'btn ghost'} href={a.href}>{a.label}</a>
+        ))}
+      </div>
+      <div class="hero-media">
+        <Image src={photo(data.hero.image.src)} alt={data.hero.image.alt} widths={[600, 900, 1200]} sizes="(max-width: 800px) 100vw, 45vw" loading="eager" />
+        <div class="cap">{data.hero.caption}</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tenester">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">{data.services.kicker}</div>
+        <h2>{data.services.heading}</h2>
+        <p>{data.services.intro}</p>
+      </div>
+      <div class="services">
+        {data.services.items.map((item) => (
+          <div class="card">
+            <div class:list={['card-media', { illustration: !item.image }]}>
+              {item.image ? (
+                <Image src={photo(item.image.src)} alt={item.image.alt} widths={[400, 700]} sizes="(max-width: 800px) 100vw, 33vw" />
+              ) : (
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#f1efe6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M10 16h34a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6H26l-9 8v-8h-7a6 6 0 0 1-6-6V22a6 6 0 0 1 6-6Z"/>
+                  <path d="M27 30c0-5 4-8 8-8-1 5-3 6-3 6s6-1 8 4c-4 3-9 2-9 2s3 3 1 7c-5-1-6-5-6-5"/>
+                </svg>
+              )}
+            </div>
+            <div class="card-body">
+              <span class="num">{item.num}</span>
+              <h3>{item.title}</h3>
+              <p>{item.lead}</p>
+              <ul>{item.points.map((p) => <li>{p}</li>)}</ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="om">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">{data.about.kicker}</div>
+        <h2>{data.about.heading}</h2>
+      </div>
+      <div class="about">
+        <div>
+          <div class="about-media">
+            <Image src={photo(data.about.image.src)} alt={data.about.image.alt} widths={[400, 700]} sizes="(max-width: 800px) 100vw, 30vw" />
+          </div>
+          {data.about.facts.map((f) => (
+            <div class="fact">
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+            </div>
+          ))}
+        </div>
+        <div><Content /></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="prosjekt">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">{data.projects.kicker}</div>
+        <h2>{data.projects.heading}</h2>
+        <p>{data.projects.intro}</p>
+      </div>
+      <div class="timeline">
+        {data.projects.items.map((item) => (
+          <div class="tl-item">
+            <div class="year">{item.year}</div>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="galleri">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">{data.gallery.kicker}</div>
+        <h2>{data.gallery.heading}</h2>
+        <p>{data.gallery.intro}</p>
+      </div>
+      <div class="gallery">
+        {data.gallery.items.map((item) => (
+          <figure class:list={[{ tall: item.tall }]}>
+            <Image src={photo(item.image.src)} alt={item.image.alt} widths={[400, 700]} sizes="(max-width: 800px) 50vw, 25vw" />
+            <figcaption>{item.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="kontakt">
+    <div class="wrap">
+      <div class="contact-box">
+        <div>
+          <h2>{data.contact.heading}</h2>
+          <p>{data.contact.body}</p>
+        </div>
+        <a class="btn" href={`mailto:${data.contact.email}`}>{data.contact.email}</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">Allmenninger – LR Mathisen · Vibrandsøy, Noreg</div>
+  </footer>
+</Layout>
