@@ -21,9 +21,6 @@ export default defineConfig({
       },
     }),
   ],
-  image: {
-    layout: 'constrained',
-  },
   markdown: {
     // Page copy is Lene's own text, kept verbatim. Leave its punctuation
     // alone rather than letting smart quotes rewrite it.

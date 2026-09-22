@@ -12,7 +12,9 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # A cancelled Pages deploy can leave the site on the previous version with no
+  # run to show for it. Queue instead.
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -24,8 +26,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # `pretest` builds, so this produces dist/ as well as testing it.
       - run: npm test
-      - run: npm run build
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist/
