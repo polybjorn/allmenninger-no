@@ -16,11 +16,12 @@ maintaining coastal heathland.
 | `--moss-dark` | `#2c4433` | Headings, the contact panel, ghost button border |
 | `--moss-mid` | `#4e6b52` | Section kickers, card numbers |
 | `--ember` | `#a8381a` | Accent on light surfaces: eyebrow, fact headings, nav hover, timeline dots, focus ring |
-| `--ember-dark` | `#8c2e15` | Reserved for a darker accent state |
 | `--ember-glow` | `#e8834f` | Accent on dark surfaces: the contact CTA |
+| `--ember-glow-hover` | `#f0946a` | CTA hover. Brighter, not darker: darkening drops the ink label to 4.29:1 |
 | `--cream` | `#faf6ee` | Page background, card fill |
 | `--paper` | `#ffffff` | Alternating section background |
 | `--ink` | `#2b2b26` | Body text, and the label on `--ember-glow` |
+| `--on-dark` | `#f1efe6` | Text over photographs and dark overlays |
 | `--muted` | `#6b6a5f` | Secondary text |
 | `--line` | `#e4ddcc` | Borders and rules |
 
@@ -51,6 +52,14 @@ change a colour, check the pairing rather than the colour on its own.
 
 `--clay` and `--moss-light` were the previous accent and kicker greens. Both
 failed AA and both are gone. Do not reintroduce them.
+
+The `rgba()` values in the file - the header wash, the caption overlays, the
+box shadows, the hero tint - are literal forms of a palette colour rather than
+tokens. If you change a token, check whether an overlay tracks it. The hero
+tint was left pointing at `--moss-light` after that colour was deleted.
+
+A custom property does not resolve inside an SVG presentation attribute, so the
+card icon's stroke is set in CSS, not as `stroke="..."` on the element.
 
 ## Type
 
@@ -102,6 +111,13 @@ attributes for CLS. They are definite dimensions, so a rule that sets `width`
 alone leaves `aspect-ratio` ignored. This shipped once: the Om photograph
 rendered 353x1333 instead of 353x471 and `object-fit: cover` cropped it to a
 strip.
+
+**Smart punctuation must stay off.** `markdown.smartypants: false` keeps her
+straight quotes and hyphens as typed. Astro has deprecated that flag and will
+drop it in a future major. Migrating it to `processor: unified({...})` needs
+`@astrojs/markdown-remark` as a direct dependency, which pulls in 132 packages
+for a site this size, so it has not been done. `test/build.test.mjs` fails if
+smart punctuation ever turns on, which is the risk the migration was for.
 
 **Page copy is Lene's and is pinned.** `test/copy.test.mjs` diffs the built
 text against a snapshot of her 2026-09-22 site. Reordering DOM text fails it.

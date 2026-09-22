@@ -73,3 +73,20 @@ test('the preview flags and the base path agree with the domain', () => {
       `${page}: the preview base path and the domain disagree in ${canonical}`);
   }
 });
+
+test('smart punctuation stays off, so the copy keeps the marks it was typed with', () => {
+  // `markdown.smartypants: false` is what holds this, and Astro has deprecated
+  // that flag: on the major that drops it, straight quotes and double hyphens
+  // start being rewritten. The Nynorsk page is pinned against her snapshot and
+  // would fail loudly. The translated pages have no snapshot, so this is what
+  // catches them - the English body has two apostrophes that would turn.
+  const smart = { '\u2018': 'left single quote', '\u2019': 'right single quote',
+    '\u201c': 'left double quote', '\u201d': 'right double quote', '\u2026': 'ellipsis' };
+  for (const page of builtPages()) {
+    const html = readFileSync(page, 'utf8');
+    const body = html.slice(html.indexOf('<body'));
+    for (const [ch, name] of Object.entries(smart)) {
+      assert.ok(!body.includes(ch), `${page}: found a ${name}, so smart punctuation is on`);
+    }
+  }
+});
