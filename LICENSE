@@ -19,3 +19,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+The MIT licence above covers the code in this repository only.
+
+The photographs under `src/assets/`, the page text under `src/content/`, the
+snapshot under `test/fixtures/` and the Allmenninger logo and favicon are the
+property of Lene Røkke Mathisen and are not licensed under it. They are
+included here to build her site and may not be reused without her permission.
