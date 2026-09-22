@@ -54,7 +54,6 @@ nav.wrap{
 .navlinks{display:flex; gap:28px; font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif; font-size:0.95rem;}
 .navlinks a{text-decoration:none; color:var(--ink); font-weight:500;}
 .navlinks a:hover{color:var(--clay);}
-.navtoggle{display:none;}
 
 .hero{
   padding:88px 0 0;
@@ -227,7 +226,18 @@ footer{
   .hero-grid{grid-template-columns:1fr;}
   .hero-media img{min-height:260px; border-radius:8px;}
   .hero-actions{padding-bottom:56px;}
-  .navlinks{display:none;}
+  /* The original hid these entirely under 800px, which left the five section
+     links reachable only by scrolling. A disclosure button would be the usual
+     answer and would also be this site's first script - the CSP forbids inline
+     ones and the page has no JavaScript at all. Five short words wrap onto a
+     line of their own instead, and the logo shrinks to pay for the height,
+     since the header is sticky. */
+  nav.wrap{flex-wrap:wrap; justify-content:center; gap:10px; padding:12px 24px;}
+  .brand-logo{height:40px; width:40px;}
+  .navlinks{
+    width:100%; flex-wrap:wrap; justify-content:center;
+    gap:8px 20px; font-size:0.9rem;
+  }
   .hero h1{font-size:2rem;}
   .contact-box{flex-direction:column; align-items:flex-start; padding:36px 28px;}
 }
