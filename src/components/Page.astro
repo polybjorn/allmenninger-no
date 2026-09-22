@@ -104,10 +104,10 @@ const others = available.filter((l) => l.code !== lang);
         <h2>{data.about.heading}</h2>
       </div>
       <div class="about">
-        <div>
-          <div class="about-media">
-            <Image src={photo(data.about.image.src)} alt={data.about.image.alt} widths={[400, 700]} sizes="(max-width: 800px) 100vw, 30vw" />
-          </div>
+        <div class="about-media">
+          <Image src={photo(data.about.image.src)} alt={data.about.image.alt} widths={[400, 700]} sizes="(max-width: 800px) 100vw, 30vw" />
+        </div>
+        <div class="about-facts">
           {data.about.facts.map((f) => (
             <div class="fact">
               <h3>{f.title}</h3>
@@ -115,7 +115,7 @@ const others = available.filter((l) => l.code !== lang);
             </div>
           ))}
         </div>
-        <div><Content /></div>
+        <div class="about-body"><Content /></div>
       </div>
     </div>
   </section>

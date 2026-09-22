@@ -143,8 +143,22 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
 .section-head p{color:var(--muted); margin:0;}
 
 /* Om */
-.about{display:grid; grid-template-columns: 0.85fr 1.4fr; gap:56px; align-items:start;}
-.about-media{margin-bottom:20px;}
+/* The facts used to stack under the photograph inside the narrow column, so
+   once the prose ran out they sat alone with the whole right-hand column empty
+   beside them. They span both columns now. The DOM order stays photo, facts,
+   prose, which is the order her page reads in and the order the fixture pins. */
+.about{
+  display:grid;
+  grid-template-columns: 0.85fr 1.4fr;
+  grid-template-areas: "media body" "facts facts";
+  gap:56px; align-items:start;
+}
+.about-media{grid-area:media;}
+.about-body{grid-area:body;}
+.about-facts{
+  grid-area:facts;
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;
+}
 /* height:auto is load-bearing. Astro writes width/height attributes on every
    image for CLS, and those are definite dimensions, so aspect-ratio below is
    ignored without it: the box rendered 353x1333 instead of 353x471 and cover
@@ -155,7 +169,7 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
 }
 .about .fact{
   background:var(--cream); border:1px solid var(--line); border-radius:4px;
-  padding:22px 24px; margin-bottom:16px;
+  padding:22px 24px;
 }
 .about .fact h3{font-size:0.95rem; margin:0 0 6px; color:var(--clay); font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;}
 .about .fact p{margin:0; font-size:0.95rem; color:var(--ink);}
@@ -257,7 +271,7 @@ footer{
 @media (max-width: 800px){
   .gallery{grid-auto-rows:200px;}
   .gallery figure.tall{grid-row: span 1;}
-  .about{grid-template-columns:1fr;}
+  .about{grid-template-columns:1fr; grid-template-areas:"media" "facts" "body";}
   .about-media img{aspect-ratio:16/10;}
   .hero-grid{grid-template-columns:1fr;}
   .hero-media img{min-height:260px; border-radius:8px;}
