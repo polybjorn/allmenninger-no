@@ -9,10 +9,10 @@ nav:
   - { href: "#galleri", label: "Gallery" }
   - { href: "#kontakt", label: "Contact" }
 hero:
-  eyebrow: "Environment · Climate · Outfield"
+  eyebrow: "Environment · Climate · Outfield land"
   heading: "Advisory services and project management for sustainable transition"
   lead: "Allmenninger – LR Mathisen helps municipalities, businesses and local communities with ecological restoration, climate adaptation and outreach – built on more than 20 years of experience in the public management of nature and the environment."
-  caption: "Controlled heather burning as part of outfield management"
+  caption: "Controlled heather burning as part of outfield land management"
   image:
     src: "hero-lyngbrenning.jpg"
     alt: "Controlled burning of coastal heathland by the sea, with smoke rising from the managed area"
@@ -25,15 +25,15 @@ services:
   intro: "Suggested packages, adapted to municipalities, businesses and collaborative projects – all of it open to discussion if you would like."
   items:
     - num: "01"
-      title: "Management plans for ecological restoration and fire risk"
-      lead: "Practical plans that reduce fire risk in the outfield and restore threatened habitat types such as coastal heathland."
+      title: "Habitat management plans for ecological restoration and fire risk"
+      lead: "Practical plans that reduce fire risk on outfield land and restore threatened habitat types such as coastal heathland."
       points:
-        - "Mapping management needs against fire risk maps"
+        - "Mapping habitat management needs against fire risk maps"
         - "Prioritising vulnerable areas"
         - "Cooperation agreements with landowners and the municipality"
       image:
         src: "teneste-01-skjotselslag-brenning.jpg"
-        alt: "A management team carrying out controlled burning as part of ecological restoration and fire prevention"
+        alt: "A heathland management group carrying out controlled burning as part of ecological restoration and fire prevention"
     - num: "02"
       title: "Outreach assignments on practical climate adaptation"
       lead: "Outreach, dialogue workshops and facilitation that make climate adaptation concrete and locally grounded."
@@ -50,13 +50,13 @@ services:
         - "Linking diet, biodiversity and climate"
       image:
         src: "teneste-03-gronsakhage.jpg"
-        alt: "Wellington boots and a fork in the soil of a vegetable garden, as part of practical teaching in food and sustainability"
+        alt: "Wellington boots and a grubbing hoe in the soil of a vegetable garden, as part of practical teaching in food and sustainability"
 about:
   kicker: "Who I am"
   heading: "About Allmenninger"
   image:
     src: "om-lene-i-felt.jpg"
-    alt: "Lene Røkke Mathisen in the field during management work, with a controlled fire and the management team behind her"
+    alt: "Lene Røkke Mathisen in the field during management work, with a controlled fire and the management group at work behind her"
   facts:
     - title: "Managing director"
       body: "Lene Røkke Mathisen, MSc Water Resources and Coastal Management (University of Bergen), BSc Environmental Science (University of Leeds)."
@@ -70,8 +70,8 @@ projects:
   intro: "A selection of projects and assignments from recent years."
   items:
     - year: "2025–2026"
-      title: "Success factors and barriers in research collaboration: developing and testing the EUReKKa method"
-      body: "A study commissioned by KS on what drives successful co-creation between the municipal sector and research institutions in developing larger cross-sectoral research applications."
+      title: "Success factors and barriers in research collaboration: developing and testing the EUReKKa recipe"
+      body: "A study commissioned by KS, the Norwegian Association of Local and Regional Authorities, on what drives successful co-creation between the municipal sector and research institutions in developing larger cross-sectoral research applications."
     - year: "2024–2025"
       title: "Coastal heathland management in Haugesund municipality"
       body: "Project coordinator – coordination between municipal agencies, the County Governor and private landowners and farmers on funding and carrying out management work."
@@ -84,7 +84,7 @@ projects:
 gallery:
   kicker: "From everyday work"
   heading: "Gallery"
-  intro: "Glimpses of outfield, coastal landscape and fieldwork around Vibrandsøy and Haugesund."
+  intro: "Glimpses of outfield land, coastal landscape and fieldwork around Vibrandsøy and Haugesund."
   items:
     - image:
         src: "galleri-solnedgang-vibrandsoy.jpg"
@@ -122,4 +122,4 @@ I am an environmental scientist by training, with a master's degree in Water Res
 
 I have solid experience with outreach assignments aimed at a range of audiences, and with running events. In 2025 I founded Allmenninger to work more deliberately on projects in sustainable transition – through outreach, the facilitation of dialogue workshops and courses, and advisory work on climate adaptation at the local level.
 
-Previously I have worked as environmental adviser and head of agriculture in Haugesund municipality, senior adviser for planning and management at the Norwegian Coastal Administration West, adviser at the Norwegian Agriculture Agency, and adviser at Forsvarsbygg Futura.
+Previously I have worked as environmental adviser and agricultural officer in Haugesund municipality, senior adviser for planning and management at the Norwegian Coastal Administration West, adviser at the Norwegian Agriculture Agency, and adviser at Forsvarsbygg Futura.
