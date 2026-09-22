@@ -18,7 +18,9 @@ const frontmatter = (lang) => {
     counts: {
       services: (body.match(/^\s+- num:/gm) ?? []).length,
       projects: (body.match(/^\s+- year:/gm) ?? []).length,
-      gallery: (body.match(/^\s+caption:/gm) ?? []).length,
+      // `- image:` starts a gallery item and nothing else; counting
+      // `caption:` here would sweep up the hero's caption as a sixth.
+      gallery: (body.match(/^\s+- image:/gm) ?? []).length,
     },
   };
 };
