@@ -1,8 +1,9 @@
 /* Ported from the original allmenninger.no stylesheet (snapshot 2026-09-22),
  which was one inline <style> block. Kept as-is so the rebuild renders like
  the site Lene already has; any design change is a separate decision.
- Known gap carried over: .navlinks is display:none under 800px and there is
- no replacement menu, so the section links are unreachable on a phone. */
+ The exceptions are marked where they appear: the mobile menu, the focus
+ indicator, the reduced-motion block and the anchor offset are repairs, not
+ ports. Her palette and type are untouched. */
 
 :root{
   --moss: #3f5d47;
@@ -16,7 +17,10 @@
   --line: #e4ddcc;
 }
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+/* The header is sticky, so an anchor target otherwise lands under it. Desktop
+   is 77px of header against 76px of section padding - flush only by luck; the
+   phone header is taller than that padding and hides the kicker line. */
+html{scroll-behavior:smooth; scroll-padding-top:8px;}
 body{
   margin:0;
   font-family: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
@@ -30,6 +34,13 @@ h1,h2,h3{
   line-height:1.2;
 }
 a{color:inherit;}
+/* Repair, not a port: the original had no focus style at all. Clay clears 3:1
+   against cream (3.44) and against the paper sections (3.70), which is what a
+   focus indicator needs. It does not clear it against the moss-dark contact
+   panel (2.86), so that one ring is overridden where the panel is defined. */
+:focus-visible{outline:3px solid var(--clay); outline-offset:2px;}
+/* The skip link focuses this, and a ring around the whole document is noise. */
+main:focus, main:focus-visible{outline:none;}
 .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
 
 /* Visible only while focused: it lets a keyboard or screen-reader visitor pass
@@ -53,14 +64,7 @@ nav.wrap{
   display:flex; align-items:center; justify-content:space-between;
   padding:16px 24px;
 }
-.brand{
-  display:flex; align-items:center; gap:10px;
-  font-family:"Avenir Next", "Helvetica Neue", Arial, sans-serif;
-  font-weight:700; font-size:1.2rem; color:var(--moss-dark);
-  letter-spacing:0.02em;
-  text-decoration:none;
-}
-.brand span{color:var(--clay);}
+.brand{display:flex; align-items:center; text-decoration:none;}
 .brand-logo{height:44px; width:auto; flex-shrink:0;}
 .navlinks{display:flex; gap:28px; font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif; font-size:0.95rem;}
 .navlinks a{text-decoration:none; color:var(--ink); font-weight:500;}
@@ -141,8 +145,12 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
 /* Om */
 .about{display:grid; grid-template-columns: 0.85fr 1.4fr; gap:56px; align-items:start;}
 .about-media{margin-bottom:20px;}
+/* height:auto is load-bearing. Astro writes width/height attributes on every
+   image for CLS, and those are definite dimensions, so aspect-ratio below is
+   ignored without it: the box rendered 353x1333 instead of 353x471 and cover
+   cropped the photo to a strip. Any rule here that sets width alone needs it. */
 .about-media img{
-  width:100%; border-radius:8px; object-fit:cover; aspect-ratio: 3/4;
+  width:100%; height:auto; border-radius:8px; object-fit:cover; aspect-ratio: 3/4;
   box-shadow:0 20px 40px -24px rgba(44,68,51,0.4);
 }
 .about .fact{
@@ -229,11 +237,21 @@ section.alt .tl-item::before{border-color:var(--paper);}
 .contact-box h2{color:#fff; margin:0 0 8px; font-size:1.7rem;}
 .contact-box p{color:#d9e2da; margin:0; max-width:420px;}
 .contact-box .btn{background:var(--clay);}
+/* Clay-on-moss-dark is 2.86:1, under the 3:1 a focus indicator needs. */
+.contact-box :focus-visible{outline-color:var(--cream);}
 .contact-box .btn:hover{background:#a1663f;}
 
 footer{
   padding:32px 0 44px; text-align:center; color:var(--muted); font-size:0.85rem;
   font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+}
+
+/* Repair, not a port. Smooth scrolling on every anchor is the vestibular
+   trigger here; the gallery zoom is the other motion on the page. */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .btn, .gallery img{transition:none;}
+  .gallery figure:hover img{transform:none;}
 }
 
 @media (max-width: 800px){
@@ -259,6 +277,13 @@ footer{
     order:1; width:100%; flex-wrap:wrap; justify-content:center;
     gap:8px 20px; font-size:0.9rem;
   }
+  /* Both rows are flex items, so the padding grows the tap target itself. A
+     bare line box is 23px and 21px tall here, under the 24px minimum. */
+  .navlinks a{padding:5px 0;}
+  .langswitch a{padding:4px 0;}
+  /* Two header rows plus that padding come to roughly 102px against 76px of
+     section padding, so the anchor needs the difference back. */
+  html{scroll-padding-top:32px;}
   .hero h1{font-size:2rem;}
   .contact-box{flex-direction:column; align-items:flex-start; padding:36px 28px;}
 }
