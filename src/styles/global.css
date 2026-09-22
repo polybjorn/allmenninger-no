@@ -54,6 +54,13 @@ nav.wrap{
 .navlinks{display:flex; gap:28px; font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif; font-size:0.95rem;}
 .navlinks a{text-decoration:none; color:var(--ink); font-weight:500;}
 .navlinks a:hover{color:var(--clay);}
+.langswitch{
+  display:flex; gap:10px; align-items:center;
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-size:0.82rem; letter-spacing:0.04em; text-transform:uppercase;
+}
+.langswitch a{text-decoration:none; color:var(--muted); font-weight:600;}
+.langswitch a:hover{color:var(--clay);}
 
 .hero{
   padding:88px 0 0;
@@ -232,10 +239,13 @@ footer{
      ones and the page has no JavaScript at all. Five short words wrap onto a
      line of their own instead, and the logo shrinks to pay for the height,
      since the header is sticky. */
-  nav.wrap{flex-wrap:wrap; justify-content:center; gap:10px; padding:12px 24px;}
+  /* Brand and language switcher share the first row, links take the second.
+     Without the order swap the switcher falls past the full-width link row and
+     the sticky header costs three rows on a phone. */
+  nav.wrap{flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; padding:12px 24px;}
   .brand-logo{height:36px; width:auto;}
   .navlinks{
-    width:100%; flex-wrap:wrap; justify-content:center;
+    order:1; width:100%; flex-wrap:wrap; justify-content:center;
     gap:8px 20px; font-size:0.9rem;
   }
   .hero h1{font-size:2rem;}

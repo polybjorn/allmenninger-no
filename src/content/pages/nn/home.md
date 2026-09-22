@@ -1,6 +1,12 @@
 ---
 title: "Allmenninger – LR Mathisen"
 description: "Rådgjeving og prosjektleiing for berekraftig omstilling. Naturrestaurering, klimatilpassing og formidling."
+nav:
+  - { href: "#tenester", label: "Tenester" }
+  - { href: "#om", label: "Om" }
+  - { href: "#prosjekt", label: "Prosjekt" }
+  - { href: "#galleri", label: "Galleri" }
+  - { href: "#kontakt", label: "Kontakt" }
 hero:
   eyebrow: "Miljø · Klima · Utmark"
   heading: "Rådgjeving og prosjektleiing for berekraftig omstilling"
@@ -101,6 +107,7 @@ gallery:
         src: "galleri-sau-beite.jpg"
         alt: "Sau på beite i grønt kystlandskap ved sjøen i regnvêr"
       caption: "Sau på beite i kystlandskapet"
+footer: "Allmenninger – LR Mathisen · Vibrandsøy, Noreg"
 contact:
   heading: "Har du eit prosjekt i tankane?"
   body: "Ta kontakt for ein uforpliktande prat om skjøtsel, klimatilpassing eller formidlingsoppdrag."

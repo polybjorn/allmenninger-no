@@ -14,6 +14,10 @@ const pages = defineCollection({
     description: z.string(),
     // Set on any language that has not been read by a native speaker.
     machineTranslated: z.boolean().default(false),
+    // Header link labels. They repeat the section headings in most languages,
+    // but not all - "Om" is not the heading "Om Allmenninger" - so they are
+    // declared rather than derived.
+    nav: z.array(z.object({ href: z.string(), label: z.string() })),
     hero: z.object({
       eyebrow: z.string(),
       heading: z.string(),
@@ -61,6 +65,7 @@ const pages = defineCollection({
         tall: z.boolean().default(false),
       })),
     }),
+    footer: z.string(),
     contact: z.object({
       heading: z.string(),
       body: z.string(),

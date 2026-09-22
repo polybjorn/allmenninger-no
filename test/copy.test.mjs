@@ -10,6 +10,10 @@ import { readFileSync } from 'node:fs';
 // Reads dist/, so it needs a build first - `pretest` does that.
 const visibleText = (html) => {
   let s = html
+    // The language switcher is chrome this rebuild added, not copy she wrote,
+    // so it is not part of what the snapshot can speak to. Dropped here rather
+    // than pardoned line by line; the test below holds it to existing.
+    .replace(/<div class="langswitch">[\s\S]*?<\/div>/g, '')
     .replace(/<(style|script|svg)\b[^>]*>[\s\S]*?<\/\1>/g, '')
     .replace(/data:image\/[a-zA-Z+]+;base64,[A-Za-z0-9+/=]+/g, '');
   s = s.slice(s.indexOf('<body'));
@@ -39,4 +43,9 @@ test('page copy matches the 2026-09-22 snapshot of allmenninger.no', () => {
     assert.equal(built[i], original[i], `line ${i + 1} differs from the snapshot`);
   }
   assert.equal(built.length, original.length);
+});
+
+test('the language switcher survives its own exclusion from the copy check', () => {
+  const html = readFileSync('dist/index.html', 'utf8');
+  assert.match(html, /<div class="langswitch">/, 'nothing left for visibleText to strip');
 });
