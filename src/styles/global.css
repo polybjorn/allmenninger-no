@@ -50,7 +50,7 @@ nav.wrap{
   text-decoration:none;
 }
 .brand span{color:var(--clay);}
-.brand-logo{height:52px; width:52px; flex-shrink:0;}
+.brand-logo{height:44px; width:auto; flex-shrink:0;}
 .navlinks{display:flex; gap:28px; font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif; font-size:0.95rem;}
 .navlinks a{text-decoration:none; color:var(--ink); font-weight:500;}
 .navlinks a:hover{color:var(--clay);}
@@ -233,7 +233,7 @@ footer{
      line of their own instead, and the logo shrinks to pay for the height,
      since the header is sticky. */
   nav.wrap{flex-wrap:wrap; justify-content:center; gap:10px; padding:12px 24px;}
-  .brand-logo{height:40px; width:40px;}
+  .brand-logo{height:36px; width:auto;}
   .navlinks{
     width:100%; flex-wrap:wrap; justify-content:center;
     gap:8px 20px; font-size:0.9rem;
