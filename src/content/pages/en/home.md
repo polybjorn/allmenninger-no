@@ -100,12 +100,12 @@ gallery:
         alt: "Clear water with seaweed and stones in the intertidal zone"
       caption: "Clear water in the intertidal zone"
     - image:
-        src: "galleri-born-brygge.jpg"
+        src: "galleri-sau-beite.jpg"
         alt: "Children on a jetty watching a gull in flight over the water"
       caption: "Children and birdlife by the jetty"
       tall: true
     - image:
-        src: "galleri-sau-beite.jpg"
+        src: "galleri-born-brygge.jpg"
         alt: "Sheep grazing in a green coastal landscape by the sea in the rain"
       caption: "Sheep grazing in the coastal landscape"
 skipLink: "Skip to content"

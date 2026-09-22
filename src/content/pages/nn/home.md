@@ -99,12 +99,12 @@ gallery:
         alt: "Klart vatn med tang og steinar i fjøresona"
       caption: "Klart vatn i fjøresona"
     - image:
-        src: "galleri-born-brygge.jpg"
+        src: "galleri-sau-beite.jpg"
         alt: "Born på ei brygge som ser på ein måse i flukt over vatnet"
       caption: "Born og fugleliv ved brygga"
       tall: true
     - image:
-        src: "galleri-sau-beite.jpg"
+        src: "galleri-born-brygge.jpg"
         alt: "Sau på beite i grønt kystlandskap ved sjøen i regnvêr"
       caption: "Sau på beite i kystlandskapet"
 skipLink: "Hopp til innhaldet"
