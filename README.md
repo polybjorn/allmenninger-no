@@ -34,7 +34,8 @@ npm run preview
 | `src/pages/index.astro` | Default locale at the root |
 | `src/pages/[lang]/index.astro` | Every other language under its own prefix |
 | `src/styles/global.css` | Ported from the original site's stylesheet, with the repairs marked where they appear |
-| `src/assets/` | Photographs, capped at 1600 px on the long side |
+| `src/assets/` | Photographs, capped at 1600 px on the long side, and the two self-hosted fonts |
+| `DESIGN.md` | Palette, type and the rules that are not obvious from the CSS |
 | `test/` | Copy fidelity, translation shape and built-output invariants |
 
 ## Going live
