@@ -3,12 +3,15 @@ interface Props {
   title: string;
   description: string;
   lang?: string;
+  // The languages that actually built, passed down rather than read from the
+  // registry: hreflang must not advertise a locale whose page does not exist.
+  alternates: { code: string }[];
 }
 
 import '../styles/global.css';
-import { locales, localeInfo, defaultLocale, pathFor } from '../i18n/locales.js';
+import { localeInfo, defaultLocale, pathFor } from '../i18n/locales.js';
 
-const { title, description, lang = defaultLocale } = Astro.props;
+const { title, description, lang = defaultLocale, alternates } = Astro.props;
 const info = localeInfo(lang);
 const site = (Astro.site?.href ?? 'https://allmenninger.no/').replace(/\/$/, '');
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -29,7 +32,7 @@ const canonical = `${site}${Astro.url.pathname}`;
   <link rel="canonical" href={canonical}>
   {!isPreview && <link rel="sitemap" href={`${base}/sitemap-index.xml`} />}
   {isPreview && <meta name="robots" content="noindex" />}
-  {locales.map((l) => (
+  {alternates.map((l) => (
     <link rel="alternate" hreflang={l.code} href={`${site}${base}${pathFor(l.code)}`} />
   ))}
   <link rel="alternate" hreflang="x-default" href={`${site}${base}${pathFor(defaultLocale)}`} />
@@ -39,7 +42,7 @@ const canonical = `${site}${Astro.url.pathname}`;
   <meta property="og:description" content={description}>
   <meta property="og:url" content={canonical}>
   <meta property="og:locale" content={info.og}>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'">
   <meta name="referrer" content="no-referrer">
 </head>
 <body>
