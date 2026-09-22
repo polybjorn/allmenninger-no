@@ -1,3 +1,20 @@
+/* Self-hosted, so the page makes no third-party request and every visitor sees
+   the same typography. The ported stacks led with Iowan Old Style and Avenir
+   Next, both macOS-only: off a Mac they silently fell back to Georgia and
+   Arial, so Lene was the only person seeing the design. Source Serif 4 stands
+   in for the first and Mulish for the second, with the originals kept behind
+   them. Both SIL OFL; the licences sit beside the files. */
+@font-face{
+  font-family:'Source Serif 4';
+  src:url('../assets/fonts/source-serif-4-400-latin.woff2') format('woff2');
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Mulish';
+  src:url('../assets/fonts/mulish-latin.woff2') format('woff2');
+  font-weight:200 1000; font-style:normal; font-display:swap;
+}
+
 /* Ported from the original allmenninger.no stylesheet (snapshot 2026-09-22),
  which was one inline <style> block. Kept as-is so the rebuild renders like
  the site Lene already has; any design change is a separate decision.
@@ -22,6 +39,8 @@
   --ink: #2b2b26;
   --muted: #6b6a5f;
   --line: #e4ddcc;
+  --font-body: 'Source Serif 4', "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+  --font-ui: 'Mulish', "Avenir Next", "Helvetica Neue", Arial, sans-serif;
 }
 *{box-sizing:border-box;}
 /* The header is sticky, so an anchor target otherwise lands under it. Desktop
@@ -30,13 +49,13 @@
 html{scroll-behavior:smooth; scroll-padding-top:8px;}
 body{
   margin:0;
-  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+  font-family: var(--font-body);
   background: var(--cream);
   color: var(--ink);
   line-height:1.6;
 }
 h1,h2,h3{
-  font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-ui);
   color: var(--moss-dark);
   line-height:1.2;
 }
@@ -55,7 +74,7 @@ main:focus, main:focus-visible{outline:none;}
 .skip-link{
   position:absolute; top:-100%; left:16px; z-index:30;
   background:var(--moss-dark); color:var(--cream);
-  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-ui);
   font-size:0.9rem; padding:10px 16px; border-radius:0 0 4px 4px;
   text-decoration:none;
 }
@@ -73,12 +92,12 @@ nav.wrap{
 }
 .brand{display:flex; align-items:center; text-decoration:none;}
 .brand-logo{height:44px; width:auto; flex-shrink:0;}
-.navlinks{display:flex; gap:28px; font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif; font-size:0.95rem;}
+.navlinks{display:flex; gap:28px; font-family:var(--font-ui); font-size:0.95rem;}
 .navlinks a{text-decoration:none; color:var(--ink); font-weight:500;}
 .navlinks a:hover{color:var(--ember);}
 .langswitch{
   display:flex; gap:10px; align-items:center;
-  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-ui);
   font-size:0.82rem; letter-spacing:0.04em; text-transform:uppercase;
 }
 .langswitch a{text-decoration:none; color:var(--muted); font-weight:600;}
@@ -96,7 +115,7 @@ nav.wrap{
   display:grid; grid-template-columns: 1.15fr 0.85fr; gap:48px; align-items:center;
 }
 .hero .eyebrow{
-  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-ui);
   text-transform:uppercase; letter-spacing:0.12em; font-size:0.78rem;
   color:var(--ember); font-weight:700; margin-bottom:16px;
 }
@@ -118,13 +137,13 @@ nav.wrap{
 .hero-media .cap{
   position:absolute; bottom:14px; left:14px; right:14px;
   background:rgba(44,68,51,0.72); color:#f1efe6;
-  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-ui);
   font-size:0.78rem; padding:8px 12px; border-radius:4px;
   backdrop-filter:blur(2px);
 }
 .btn{
   display:inline-block;
-  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-ui);
   background:var(--moss); color:#fff; text-decoration:none;
   padding:13px 26px; border-radius:2px; font-weight:600; font-size:0.95rem;
   letter-spacing:0.01em;
@@ -142,7 +161,7 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
 
 .section-head{max-width:640px; margin-bottom:48px;}
 .section-head .kicker{
-  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-ui);
   text-transform:uppercase; letter-spacing:0.12em; font-size:0.75rem;
   color:var(--moss-mid); font-weight:700; margin-bottom:10px;
 }
@@ -178,7 +197,7 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
   background:var(--cream); border:1px solid var(--line); border-radius:4px;
   padding:22px 24px;
 }
-.about .fact h3{font-size:0.95rem; margin:0 0 6px; color:var(--ember); font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;}
+.about .fact h3{font-size:0.95rem; margin:0 0 6px; color:var(--ember); font-family:var(--font-ui);}
 .about .fact p{margin:0; font-size:0.95rem; color:var(--ink);}
 
 /* Tenester / produkt */
@@ -203,7 +222,7 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
 .card-media.illustration svg{width:84px; height:84px;}
 .card-body{padding:28px 28px 30px;}
 .card .num{
-  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-ui);
   font-size:0.8rem; color:var(--moss-mid); font-weight:700; letter-spacing:0.08em;
   margin-bottom:14px; display:block;
 }
@@ -223,7 +242,7 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
 }
 section.alt .tl-item::before{border-color:var(--paper);}
 .tl-item .year{
-  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-ui);
   font-weight:700; color:var(--moss-dark); font-size:0.92rem; margin-bottom:4px;
 }
 .tl-item h3{font-size:1.05rem; margin:0 0 6px;}
@@ -246,7 +265,7 @@ section.alt .tl-item::before{border-color:var(--paper);}
 .gallery figcaption{
   position:absolute; bottom:0; left:0; right:0;
   background:linear-gradient(0deg, rgba(44,68,51,0.78) 0%, rgba(44,68,51,0) 100%);
-  color:#f1efe6; font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  color:#f1efe6; font-family:var(--font-ui);
   font-size:0.82rem; padding:26px 14px 10px;
 }
 
@@ -264,7 +283,7 @@ section.alt .tl-item::before{border-color:var(--paper);}
 
 footer{
   padding:32px 0 44px; text-align:center; color:var(--muted); font-size:0.85rem;
-  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-ui);
 }
 
 /* Repair, not a port. Smooth scrolling on every anchor is the vestibular

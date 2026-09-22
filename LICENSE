@@ -28,3 +28,7 @@ The photographs under `src/assets/`, the page text under `src/content/`, the
 snapshot under `test/fixtures/` and the Allmenninger logo and favicon are the
 property of Lene Røkke Mathisen and are not licensed under it. They are
 included here to build her site and may not be reused without her permission.
+
+The fonts under `src/assets/fonts/` are third-party and carry their own terms:
+Source Serif 4 and Mulish, both under the SIL Open Font License 1.1. The
+licence text sits beside the font files.

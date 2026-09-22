@@ -9,6 +9,8 @@ interface Props {
 }
 
 import '../styles/global.css';
+import bodyFont from '../assets/fonts/source-serif-4-400-latin.woff2?url';
+import uiFont from '../assets/fonts/mulish-latin.woff2?url';
 import { localeInfo, defaultLocale, pathFor } from '../i18n/locales.js';
 
 const { title, description, lang = defaultLocale, alternates } = Astro.props;
@@ -29,6 +31,10 @@ const canonical = `${site}${Astro.url.pathname}`;
   <title>{title}</title>
   <meta name="description" content={description}>
   <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`}>
+  {/* Both faces are used above the fold. Same-origin font preloads still need
+      crossorigin, or the browser fetches them a second time. */}
+  <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href={uiFont} as="font" type="font/woff2" crossorigin />
   <link rel="canonical" href={canonical}>
   {!isPreview && <link rel="sitemap" href={`${base}/sitemap-index.xml`} />}
   {isPreview && <meta name="robots" content="noindex" />}
