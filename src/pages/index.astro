@@ -1,0 +1,9 @@
+---
+import { getEntry } from 'astro:content';
+import Page from '../components/Page.astro';
+import { defaultLocale } from '../i18n/locales.js';
+
+const entry = await getEntry('pages', `${defaultLocale}/home`);
+if (!entry) throw new Error(`No page content for ${defaultLocale}`);
+---
+<Page entry={entry} lang={defaultLocale} />

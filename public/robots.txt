@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://allmenninger.no/sitemap-index.xml

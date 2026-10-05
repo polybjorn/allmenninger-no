@@ -1,0 +1,330 @@
+/* Self-hosted, so the page makes no third-party request and every visitor sees
+   the same typography. The ported stacks led with Iowan Old Style and Avenir
+   Next, both macOS-only: off a Mac they silently fell back to Georgia and
+   Arial, so Lene was the only person seeing the design. Source Serif 4 stands
+   in for the first and Mulish for the second, with the originals kept behind
+   them. Both SIL OFL; the licences sit beside the files. */
+@font-face{
+  font-family:'Source Serif 4';
+  src:url('../assets/fonts/source-serif-4-400-latin.woff2') format('woff2');
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Mulish';
+  src:url('../assets/fonts/mulish-latin.woff2') format('woff2');
+  font-weight:200 1000; font-style:normal; font-display:swap;
+}
+
+/* Ported from the original allmenninger.no stylesheet (snapshot 2026-09-22),
+ which was one inline <style> block. Kept as-is so the rebuild renders like
+ the site Lene already has; any design change is a separate decision.
+ The exceptions are marked where they appear: the mobile menu, the focus
+ indicator, the reduced-motion block and the anchor offset are repairs, not
+ ports. Her palette and type are untouched. */
+
+/* Green is the ground the work happens on; the reds are the fire she uses to
+   manage it. The accent has two forms because one cannot serve both surfaces:
+   --ember is the dark form for text and rings on cream, --ember-glow the light
+   form for a filled control on the moss-dark panel. Every pairing the page
+   actually makes clears WCAG AA; the numbers are in the style guide. */
+:root{
+  --moss: #3f5d47;
+  --moss-dark: #2c4433;
+  --moss-mid: #4e6b52;
+  --cream: #faf6ee;
+  --paper: #ffffff;
+  --ember: #a8381a;
+  --ember-glow: #e8834f;
+  --ember-glow-hover: #f0946a;
+  --ink: #2b2b26;
+  --on-dark: #f1efe6;
+  --muted: #6b6a5f;
+  --line: #e4ddcc;
+  --font-body: 'Source Serif 4', "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+  --font-ui: 'Mulish', "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+/* The header is sticky, so an anchor target otherwise lands under it. Desktop
+   is 77px of header against 76px of section padding - flush only by luck; the
+   phone header is taller than that padding and hides the kicker line. */
+html{scroll-behavior:smooth; scroll-padding-top:8px;}
+body{
+  margin:0;
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height:1.6;
+}
+h1,h2,h3{
+  font-family: var(--font-ui);
+  color: var(--moss-dark);
+  line-height:1.2;
+}
+a{color:inherit;}
+/* Repair, not a port: the original had no focus style at all. Clay clears 3:1
+   against cream (3.44) and against the paper sections (3.70), which is what a
+   focus indicator needs. It does not clear it against the moss-dark contact
+   panel (2.86), so that one ring is overridden where the panel is defined. */
+:focus-visible{outline:3px solid var(--ember); outline-offset:2px;}
+/* The skip link focuses this, and a ring around the whole document is noise. */
+main:focus, main:focus-visible{outline:none;}
+.wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
+
+/* Visible only while focused: it lets a keyboard or screen-reader visitor pass
+   the six header links and land on the content. */
+.skip-link{
+  position:absolute; top:-100%; left:16px; z-index:30;
+  background:var(--moss-dark); color:var(--cream);
+  font-family:var(--font-ui);
+  font-size:0.9rem; padding:10px 16px; border-radius:0 0 4px 4px;
+  text-decoration:none;
+}
+.skip-link:focus{top:0;}
+
+header{
+  position:sticky; top:0; z-index:20;
+  background:rgba(250,246,238,0.92);
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid var(--line);
+}
+nav.wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 24px;
+}
+.brand{display:flex; align-items:center; text-decoration:none;}
+.brand-logo{height:44px; width:auto; flex-shrink:0;}
+.navlinks{display:flex; gap:28px; font-family:var(--font-ui); font-size:0.95rem;}
+.navlinks a{text-decoration:none; color:var(--ink); font-weight:500;}
+.navlinks a:hover{color:var(--ember);}
+.langswitch{
+  display:flex; gap:10px; align-items:center;
+  font-family:var(--font-ui);
+  font-size:0.82rem; letter-spacing:0.04em; text-transform:uppercase;
+}
+.langswitch a{text-decoration:none; color:var(--muted); font-weight:600;}
+.langswitch a:hover{color:var(--ember);}
+
+.hero{
+  padding:88px 0 0;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(78,107,82,0.16), transparent 55%),
+    var(--cream);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid; grid-template-columns: 1.15fr 0.85fr; gap:48px; align-items:center;
+}
+.hero .eyebrow{
+  font-family:var(--font-ui);
+  text-transform:uppercase; letter-spacing:0.12em; font-size:0.78rem;
+  color:var(--ember); font-weight:700; margin-bottom:16px;
+}
+.hero h1{
+  font-size:2.5rem; margin:0 0 20px;
+}
+.hero p.lead{
+  font-size:1.1rem; color:var(--muted); margin-bottom:32px;
+}
+.hero-actions{padding-bottom:88px;}
+.hero-media{
+  position:relative; align-self:stretch;
+}
+.hero-media img{
+  width:100%; height:100%; min-height:420px; object-fit:cover;
+  border-radius:8px 8px 0 0;
+  box-shadow:0 30px 60px -30px rgba(44,68,51,0.45);
+}
+.hero-media .cap{
+  position:absolute; bottom:14px; left:14px; right:14px;
+  background:rgba(44,68,51,0.72); color:var(--on-dark);
+  font-family:var(--font-ui);
+  font-size:0.78rem; padding:8px 12px; border-radius:4px;
+  backdrop-filter:blur(2px);
+}
+.btn{
+  display:inline-block;
+  font-family:var(--font-ui);
+  background:var(--moss); color:#fff; text-decoration:none;
+  padding:13px 26px; border-radius:2px; font-weight:600; font-size:0.95rem;
+  letter-spacing:0.01em;
+  transition:background 0.15s ease;
+}
+.btn:hover{background:var(--moss-dark);}
+.btn.ghost{
+  background:transparent; color:var(--moss-dark); border:1px solid var(--moss);
+  margin-left:14px;
+}
+.btn.ghost:hover{background:var(--moss); color:#fff;}
+
+section{padding:76px 0;}
+section.alt{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+
+.section-head{max-width:640px; margin-bottom:48px;}
+.section-head .kicker{
+  font-family:var(--font-ui);
+  text-transform:uppercase; letter-spacing:0.12em; font-size:0.75rem;
+  color:var(--moss-mid); font-weight:700; margin-bottom:10px;
+}
+.section-head h2{font-size:1.9rem; margin:0 0 14px;}
+.section-head p{color:var(--muted); margin:0;}
+
+/* Om */
+/* The facts used to stack under the photograph inside the narrow column, so
+   once the prose ran out they sat alone with the whole right-hand column empty
+   beside them. They span both columns now. The DOM order stays photo, facts,
+   prose, which is the order her page reads in and the order the fixture pins. */
+.about{
+  display:grid;
+  grid-template-columns: 0.85fr 1.4fr;
+  grid-template-areas: "media body" "facts facts";
+  gap:56px; align-items:start;
+}
+.about-media{grid-area:media;}
+.about-body{grid-area:body;}
+.about-facts{
+  grid-area:facts;
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;
+}
+/* height:auto is load-bearing. Astro writes width/height attributes on every
+   image for CLS, and those are definite dimensions, so aspect-ratio below is
+   ignored without it: the box rendered 353x1333 instead of 353x471 and cover
+   cropped the photo to a strip. Any rule here that sets width alone needs it. */
+.about-media img{
+  width:100%; height:auto; border-radius:8px; object-fit:cover; aspect-ratio: 3/4;
+  box-shadow:0 20px 40px -24px rgba(44,68,51,0.4);
+}
+.about .fact{
+  background:var(--cream); border:1px solid var(--line); border-radius:4px;
+  padding:22px 24px;
+}
+.about .fact h3{font-size:0.95rem; margin:0 0 6px; color:var(--ember); font-family:var(--font-ui);}
+.about .fact p{margin:0; font-size:0.95rem; color:var(--ink);}
+
+/* Tenester / produkt */
+.services{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap:30px;
+}
+.card{
+  background:var(--cream); border:1px solid var(--line); border-radius:8px;
+  position:relative; overflow:hidden;
+}
+.card-media{
+  height:190px; position:relative; background:var(--moss);
+}
+.card-media img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.card-media.illustration{
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(155deg, var(--moss) 0%, var(--moss-dark) 100%);
+}
+.card-media.illustration svg{width:84px; height:84px; stroke:var(--on-dark);}
+.card-body{padding:28px 28px 30px;}
+.card .num{
+  font-family:var(--font-ui);
+  font-size:0.8rem; color:var(--moss-mid); font-weight:700; letter-spacing:0.08em;
+  margin-bottom:14px; display:block;
+}
+.card h3{font-size:1.2rem; margin:0 0 12px;}
+.card p{color:var(--muted); font-size:0.97rem; margin:0 0 14px;}
+.card ul{margin:0; padding-left:18px; color:var(--ink); font-size:0.93rem;}
+.card ul li{margin-bottom:6px;}
+
+/* Prosjekt */
+.timeline{border-left:2px solid var(--line); margin-left:6px; padding-left:32px;}
+.tl-item{position:relative; padding-bottom:34px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{
+  content:""; position:absolute; left:-38px; top:4px;
+  width:12px; height:12px; border-radius:50%;
+  background:var(--ember); border:3px solid var(--cream);
+}
+section.alt .tl-item::before{border-color:var(--paper);}
+.tl-item .year{
+  font-family:var(--font-ui);
+  font-weight:700; color:var(--moss-dark); font-size:0.92rem; margin-bottom:4px;
+}
+.tl-item h3{font-size:1.05rem; margin:0 0 6px;}
+.tl-item p{margin:0; color:var(--muted); font-size:0.95rem;}
+
+/* Galleri */
+.gallery{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-auto-rows:220px; gap:16px;
+}
+.gallery figure{
+  margin:0; position:relative; overflow:hidden; border-radius:8px; background:var(--moss);
+}
+.gallery figure.tall{grid-row: span 2;}
+.gallery img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .5s ease;
+}
+.gallery figure:hover img{transform:scale(1.05);}
+.gallery figcaption{
+  position:absolute; bottom:0; left:0; right:0;
+  background:linear-gradient(0deg, rgba(44,68,51,0.78) 0%, rgba(44,68,51,0) 100%);
+  color:var(--on-dark); font-family:var(--font-ui);
+  font-size:0.82rem; padding:26px 14px 10px;
+}
+
+/* Kontakt */
+.contact-box{
+  background:var(--moss-dark); color:#fff; border-radius:8px;
+  padding:52px 48px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px;
+}
+.contact-box h2{color:#fff; margin:0 0 8px; font-size:1.7rem;}
+.contact-box p{color:#d9e2da; margin:0; max-width:420px;}
+.contact-box .btn{background:var(--ember-glow); color:var(--ink);}
+/* Clay-on-moss-dark is 2.86:1, under the 3:1 a focus indicator needs. */
+.contact-box :focus-visible{outline-color:var(--cream);}
+.contact-box .btn:hover{background:var(--ember-glow-hover);}
+
+footer{
+  padding:32px 0 44px; text-align:center; color:var(--muted); font-size:0.85rem;
+  font-family:var(--font-ui);
+}
+
+/* Repair, not a port. Smooth scrolling on every anchor is the vestibular
+   trigger here; the gallery zoom is the other motion on the page. */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .btn, .gallery img{transition:none;}
+  .gallery figure:hover img{transform:none;}
+}
+
+@media (max-width: 800px){
+  .gallery{grid-auto-rows:200px;}
+  .gallery figure.tall{grid-row: span 1;}
+  .about{grid-template-columns:1fr; grid-template-areas:"media" "facts" "body";}
+  .about-media img{aspect-ratio:16/10;}
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-media img{min-height:260px; border-radius:8px;}
+  .hero-actions{padding-bottom:56px;}
+  /* The original hid these entirely under 800px, which left the five section
+     links reachable only by scrolling. A disclosure button would be the usual
+     answer and would also be this site's first script - the CSP forbids inline
+     ones and the page has no JavaScript at all. Five short words wrap onto a
+     line of their own instead, and the logo shrinks to pay for the height,
+     since the header is sticky. */
+  /* Brand and language switcher share the first row, links take the second.
+     Without the order swap the switcher falls past the full-width link row and
+     the sticky header costs three rows on a phone. */
+  nav.wrap{flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; padding:12px 24px;}
+  .brand-logo{height:36px; width:auto;}
+  .navlinks{
+    order:1; width:100%; flex-wrap:wrap; justify-content:center;
+    gap:8px 20px; font-size:0.9rem;
+  }
+  /* Both rows are flex items, so the padding grows the tap target itself. A
+     bare line box is 23px and 21px tall here, under the 24px minimum. */
+  .navlinks a{padding:5px 0;}
+  .langswitch a{padding:4px 0;}
+  /* Two header rows plus that padding come to roughly 102px against 76px of
+     section padding, so the anchor needs the difference back. */
+  html{scroll-padding-top:32px;}
+  .hero h1{font-size:2rem;}
+  .contact-box{flex-direction:column; align-items:flex-start; padding:36px 28px;}
+}

@@ -1,0 +1,22 @@
+---
+import { getEntry } from 'astro:content';
+import Page from '../../components/Page.astro';
+import { locales, defaultLocale } from '../../i18n/locales.js';
+
+// The default locale lives at the root, so it is not one of these. A language
+// declared in locales.js with no content file is skipped rather than built
+// empty - that is what lets the registry carry a language before its copy
+// exists.
+export async function getStaticPaths() {
+  const others = locales.filter((l) => l.code !== defaultLocale);
+  const entries = await Promise.all(
+    others.map(async (l) => ({ lang: l.code, entry: await getEntry('pages', `${l.code}/home`) })),
+  );
+  return entries
+    .filter(({ entry }) => entry)
+    .map(({ lang, entry }) => ({ params: { lang }, props: { entry, lang } }));
+}
+
+const { entry, lang } = Astro.props;
+---
+<Page entry={entry} lang={lang} />
