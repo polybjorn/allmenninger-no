@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "preview:build": "astro build --base \"/allmenninger-no/$BRANCH/\"",
     "astro": "astro",
     "clean": "rm -rf node_modules/.astro dist",
     "pretest": "npm run build",
