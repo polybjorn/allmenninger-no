@@ -12,7 +12,9 @@ const isPreview = !site.includes('allmenninger.no');
 
 export default defineConfig({
   site,
-  base: '/allmenninger-no',
+  // A branch preview on the fleet's site-preview server lands on a subpath of
+  // its own; scripts/build-preview.mjs sets this to match.
+  base: process.env.PREVIEW_BASE ?? '/allmenninger-no',
   integrations: isPreview ? [] : [
     sitemap({
       i18n: {

@@ -12,9 +12,8 @@ export async function getStaticPaths() {
   const entries = await Promise.all(
     others.map(async (l) => ({ lang: l.code, entry: await getEntry('pages', `${l.code}/home`) })),
   );
-  return entries
-    .filter(({ entry }) => entry)
-    .map(({ lang, entry }) => ({ params: { lang }, props: { entry, lang } }));
+  return entries.flatMap(({ lang, entry }) =>
+    entry ? [{ params: { lang }, props: { entry, lang } }] : []);
 }
 
 const { entry, lang } = Astro.props;

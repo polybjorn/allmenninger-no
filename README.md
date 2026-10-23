@@ -22,6 +22,7 @@ npm run dev      # http://localhost:4321/allmenninger-no
 npm run build
 npm run preview
 npm test         # builds, then runs test/*.test.mjs
+npm run check    # astro check: types and the content schema
 ```
 
 `test/build.test.mjs` guards the go-live edits (see Going live). Requires Node >= 22.12, which Astro sets as its minimum.

@@ -6,14 +6,22 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "preview:build": "astro build --base \"/allmenninger-no/$BRANCH/\"",
+    "preview:build": "node scripts/build-preview.mjs",
     "astro": "astro",
     "clean": "rm -rf node_modules/.astro dist",
     "pretest": "npm run build",
-    "test": "node --test \"test/*.test.mjs\""
+    "test": "node --test \"test/*.test.mjs\"",
+    "check": "astro check"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.1.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "typescript": "^6.0.3"
   }
 }
