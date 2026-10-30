@@ -1,56 +1,29 @@
 # allmenninger.no
 
-Astro rebuild of [allmenninger.no](https://allmenninger.no), the site of
-Allmenninger - LR Mathisen: advisory and project management for sustainable
-transition, based on Vibrandsøy in Norway.
+A proposed new website for Allmenninger, Lene Røkke Mathisen's advisory and
+project management for sustainable transition, based on Vibrandsøy in Norway.
+The current site is [allmenninger.no](https://allmenninger.no). This one runs
+as a preview at
+[polybjorn.github.io/allmenninger-no](https://polybjorn.github.io/allmenninger-no/).
 
-The site is one scrolling page with five sections: tenester, om, prosjekt,
-galleri, kontakt. Nynorsk is the source and sits at the root; English is
-translated from it and sits at `/en/`.
+## How it works
 
-## Status
+Built with [Astro](https://astro.build) as static HTML and plain CSS, with no
+JavaScript at all, like the original. It is one scrolling page in five
+sections: tenester, om, prosjekt, galleri and kontakt.
 
-Preview, not live. The live site still runs from Netlify. This build deploys to
-`polybjorn.github.io/allmenninger-no` and carries `noindex` so it never
-competes with the original in search.
+The text is Lene's own, restored word for word from the current site, and a
+test compares the built page with it, so nothing changes unnoticed. Fonts and
+photos are served from the site itself, so a visit loads nothing from any other
+domain.
 
-## Develop
+## Languages
 
-```bash
-npm install
-npm run dev      # http://localhost:4321/allmenninger-no
-npm run build
-npm run preview
-npm test         # builds, then runs test/*.test.mjs
-npm run check    # astro check: types and the content schema
-```
+Nynorsk is the original and sits at the root. English is translated from it and
+sits at `/en/`, marked as machine-translated until Lene has proofread it. Both
+languages have the same sections, anchors and photos.
 
-`test/build.test.mjs` guards the go-live edits (see Going live). Requires Node >= 22.12, which Astro sets as its minimum.
+## License
 
-## Structure
-
-| Path | What |
-|---|---|
-| `src/content/pages/<lang>/home.md` | All page copy, one file per language. Frontmatter holds the cards, timeline and gallery; the body is the Om prose |
-| `src/i18n/locales.js` | Language registry. A locale with no content file is skipped rather than built empty, and drops out of the switcher and the hreflang tags with it |
-| `src/components/Page.astro` | The whole document. The routes only choose which language to hand it |
-| `src/layouts/Layout.astro` | Head, CSP and the hreflang set |
-| `src/pages/index.astro` | Default locale at the root |
-| `src/pages/[lang]/index.astro` | Every other language under its own prefix |
-| `src/styles/global.css` | Ported from the original site's stylesheet, with the repairs marked where they appear |
-| `src/assets/` | Photographs, capped at 1600 px on the long side, and the two self-hosted fonts |
-| `DESIGN.md` | Palette, type and the rules that are not obvious from the CSS |
-| `test/` | Copy fidelity, translation shape and built-output invariants |
-
-## Going live
-
-Set `site` to `https://allmenninger.no` and drop `base` in `astro.config.mjs`.
-The `noindex` meta and the skipped sitemap both key off that check, so they
-resolve themselves, and `test/build.test.mjs` fails if only one of the two
-edits is made. Point DNS at GitHub Pages and set the custom domain in the
-repository's Pages settings.
-
-## Licence
-
-MIT for the code. The photographs and page text belong to Lene Røkke Mathisen
-and are not covered by it.
+MIT for the code. The page texts and photos belong to Lene Røkke Mathisen and
+are not covered by it.
