@@ -67,9 +67,11 @@ const others = available.filter((l) => l.code !== lang);
         <div class="eyebrow">{data.hero.eyebrow}</div>
         <h1>{data.hero.heading}</h1>
         <p class="lead">{data.hero.lead}</p>
-        {data.hero.actions.map((a, i) => (
-          <a class={i === 0 ? 'btn' : 'btn ghost'} href={a.href}>{a.label}</a>
-        ))}
+        <div class="hero-buttons">
+          {data.hero.actions.map((a, i) => (
+            <a class={i === 0 ? 'btn' : 'btn ghost'} href={a.href}>{a.label}</a>
+          ))}
+        </div>
       </div>
       <div class="hero-media">
         <Image src={photo(data.hero.image.src)} alt={data.hero.image.alt} widths={[600, 900, 1200]} sizes="(max-width: 800px) 100vw, 45vw" loading="eager" />

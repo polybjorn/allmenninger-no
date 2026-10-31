@@ -133,6 +133,7 @@ nav.wrap{
   font-size:1.1rem; color:var(--muted); margin-bottom:32px;
 }
 .hero-actions{padding-bottom:88px;}
+.hero-buttons{display:flex; flex-wrap:wrap; gap:14px;}
 .hero-media{
   position:relative; align-self:stretch;
 }
@@ -159,7 +160,6 @@ nav.wrap{
 .btn:hover{background:var(--moss-dark);}
 .btn.ghost{
   background:transparent; color:var(--moss-dark); border:1px solid var(--moss);
-  margin-left:14px;
 }
 .btn.ghost:hover{background:var(--moss); color:#fff;}
 
@@ -209,7 +209,7 @@ section.alt{background:var(--paper); border-top:1px solid var(--line); border-bo
 
 /* Tenester / produkt */
 .services{
-  display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap:30px;
 }
 .card{
