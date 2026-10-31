@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { glue } from '../src/plugins/rehype-nbsp.mjs';
 
 // Invariants of the built output, as opposed to the copy (copy.test.mjs) or
 // the shape of a translation (languages.test.mjs). Each one here answers a
@@ -89,4 +90,27 @@ test('smart punctuation stays off, so the copy keeps the marks it was typed with
       assert.ok(!body.includes(ch), `${page}: found a ${name}, so smart punctuation is on`);
     }
   }
+});
+
+test('the no-break rules glue a dash, a price, a phone number and a size', () => {
+  assert.equal(glue('samarbeidsprosjekt – dette kan'), 'samarbeidsprosjekt\u00a0– dette kan');
+  assert.equal(glue('7 800 kr'), '7\u00a0800\u00a0kr');
+  assert.equal(glue('480 05 508'), '480\u00a005\u00a0508');
+  assert.equal(glue('20 år som rådgjevar, ca 1 måned'), '20\u00a0år som rådgjevar, ca\u00a01\u00a0måned');
+  for (const text of ['2025–2026', 'over 20 års erfaring', 'ENK, starta i 2025.']) assert.equal(glue(text), text);
+});
+
+// The rehype pass reaches the markdown body only, and Page.astro glues the
+// frontmatter; text written into a component reaches the page around both, so
+// the built page is what this reads.
+test('no line on a built page can start with a dash or split a number', () => {
+  const off = [];
+  for (const page of builtPages()) {
+    const body = readFileSync(page, 'utf8').match(/<body[^>]*>([\s\S]*)<\/body>/)?.[1] ?? '';
+    const text = body.replace(/<(script|style)\b[\s\S]*?<\/\1>/g, '').replace(/&nbsp;|&#160;/g, '\u00a0');
+    for (const run of text.split(/<[^>]*>/)) {
+      if (glue(run) !== run) off.push(`${page}: "${run.trim()}"`);
+    }
+  }
+  assert.deepEqual(off, []);
 });

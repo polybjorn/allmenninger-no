@@ -1,7 +1,10 @@
 // @ts-check
+import { createHash } from 'node:crypto';
+import { readdirSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { locales, defaultLocale } from './src/i18n/locales.js';
+import { rehypeNbsp } from './src/plugins/rehype-nbsp.mjs';
 
 // Preview deployment on GitHub Pages. At launch: site back to
 // 'https://allmenninger.no' and drop `base`. Preview builds also skip the
@@ -9,6 +12,13 @@ import { locales, defaultLocale } from './src/i18n/locales.js';
 // so the preview never competes with the live Netlify site.
 const site = 'https://polybjorn.github.io';
 const isPreview = !site.includes('allmenninger.no');
+
+// Astro caches rendered markdown by the markdown alone, so a plugin edit needs
+// a changed config to reach the pages; a digest of their source is that change.
+const plugins = new URL('./src/plugins/', import.meta.url);
+const pluginsDigest = createHash('sha256')
+  .update(readdirSync(plugins).sort().map((f) => readFileSync(new URL(f, plugins), 'utf8')).join('\0'))
+  .digest('hex');
 
 export default defineConfig({
   site,
@@ -27,6 +37,7 @@ export default defineConfig({
     // Page copy is Lene's own text, kept verbatim. Leave its punctuation
     // alone rather than letting smart quotes rewrite it.
     smartypants: false,
+    rehypePlugins: [[rehypeNbsp, { digest: pluginsDigest }]],
   },
   compressHTML: true,
   vite: {

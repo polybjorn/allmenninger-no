@@ -30,7 +30,9 @@ const visibleText = (html) => {
       amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ',
     }[e] ?? m))
     .split('\n')
-    .map((l) => l.trim())
+    // A no-break space is glue against a bad line break (rehype-nbsp.mjs),
+    // not a change to the words.
+    .map((l) => l.replace(/\u00a0/g, ' ').trim())
     .filter(Boolean);
 };
 

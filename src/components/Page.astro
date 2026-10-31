@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import { locales, pathFor } from '../i18n/locales.js';
 import logo from '../assets/logo.svg';
 import type { ImageMetadata } from 'astro';
+import { glue } from '../plugins/rehype-nbsp.mjs';
 
 interface Props {
   entry: CollectionEntry<'pages'>;
@@ -12,7 +13,13 @@ interface Props {
 }
 
 const { entry, lang } = Astro.props;
-const { data } = entry;
+// The rehype pass reaches only the markdown body, and the rest of the page is
+// frontmatter, so its strings take the same no-break glue here.
+const glueAll = <T,>(v: T): T => (typeof v === 'string' ? glue(v)
+  : Array.isArray(v) ? v.map(glueAll)
+  : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, glueAll(x)]))
+  : v) as T;
+const data = glueAll(entry.data);
 // The Om section is the one piece of flowing prose, so it is the markdown body.
 const { Content } = await render(entry);
 
