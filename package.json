@@ -11,8 +11,7 @@
     "clean": "rm -rf node_modules/.astro dist",
     "pretest": "npm run build",
     "test": "node --test \"test/*.test.mjs\"",
-    "check": "astro check",
-    "text-changes:check": "node scripts/text-changes-check.mjs"
+    "check": "astro check"
   },
   "engines": {
     "node": ">=22.12.0"
