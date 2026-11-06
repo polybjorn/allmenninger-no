@@ -334,3 +334,9 @@ footer{
   .hero h1{font-size:2rem;}
   .contact-box{flex-direction:column; align-items:flex-start; padding:36px 28px;}
 }
+
+/* Running text stops at about 75 characters a line. The timeline spans the
+   whole 1040px wrap, and the one-column phone and tablet layout gives the Om
+   prose and the lead the full width, which ran to 126 and 94 characters. The
+   cap is in ch, so it follows each paragraph's own font size. */
+.hero p.lead, .section-head p, .about-body p, .tl-item p{max-width:66ch;}
