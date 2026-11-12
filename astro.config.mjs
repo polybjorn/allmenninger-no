@@ -10,7 +10,9 @@ import { rehypeNbsp } from './src/plugins/rehype-nbsp.mjs';
 // 'https://allmenninger.no' and drop `base`. Preview builds also skip the
 // sitemap and carry a noindex meta (Layout.astro), both keyed on this check,
 // so the preview never competes with the live Netlify site.
-const site = 'https://polybjorn.github.io';
+// LAUNCH_SITE builds the launch state ahead of time, so tools/site-compare can
+// check the sitemap and indexing the preview leaves out.
+const site = process.env.LAUNCH_SITE ?? 'https://polybjorn.github.io';
 const isPreview = !site.includes('allmenninger.no');
 
 // Astro caches rendered markdown by the markdown alone, so a plugin edit needs

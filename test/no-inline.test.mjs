@@ -40,4 +40,11 @@ for (const page of pages) {
       [...attrs.matchAll(/\s(style|on[a-z]+)\s*=/gi)].map((m) => `<${name} ${m[1]}>`));
     assert.deepEqual(found, []);
   });
+
+  test(`${page}: the CSP lets the page fetch robots.txt`, () => {
+    // Lighthouse reads robots.txt through a fetch from the page, so a policy
+    // without connect-src 'self' costs the SEO score though nothing here runs.
+    const csp = html.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1] ?? '';
+    assert.match(csp, /(^|;)\s*connect-src 'self'/);
+  });
 }

@@ -55,7 +55,10 @@ const canonical = `${site}${Astro.url.pathname}`;
   <meta property="og:image:height" content={String(image.height)}>
   <meta property="og:image:alt" content={image.alt}>
   <meta name="twitter:card" content="summary_large_image">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'">
+  {/* connect-src although the page has no script: Lighthouse and PageSpeed
+      Insights fetch robots.txt from inside the page, and a refused fetch is
+      scored as an invalid robots.txt. */}
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'">
   <meta name="referrer" content="no-referrer">
 </head>
 <body>
